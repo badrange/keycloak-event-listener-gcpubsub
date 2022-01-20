@@ -25,9 +25,10 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - run: mkdir staging && cp target/*.jar staging
-    - uses: actions/upload-artifact@v2
+    - name: Upload release asset
+      uses: softprops/action-gh-release@v1
       with:
-        path: staging/*.jar
+        files: staging/*.jar
     # - name: Publish to GitHub Packages Apache Maven
     #   run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
     #   env:
